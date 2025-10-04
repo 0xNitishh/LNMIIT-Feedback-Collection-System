@@ -1,59 +1,64 @@
-# Sample Hardhat 3 Beta Project (`node:test` and `viem`)
+# LNMIIT Faculty Feedback Collection Software
 
-This project showcases a Hardhat 3 Beta project using the native Node.js test runner (`node:test`) and the `viem` library for Ethereum interactions.
+A fully decentralized application (dApp) built on the Ethereum Sepolia testnet that allows students to securely and anonymously submit faculty feedback. The platform ensures data integrity and prevents duplicate submissions by leveraging a Solidity smart contract.
 
-To learn more about the Hardhat 3 Beta, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3 Beta](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
+## ✨ Features
+1. Wallet Integration: Securely connect and disconnect using a MetaMask wallet.
+2. On-Chain Data: All feedback submissions (professor, semester, and individual ratings) are permanently stored on the blockchain.
+3. Prevents Duplicate Submissions: A student cannot submit feedback for the same professor in the same semester more than once.
+4. Real-time Calculations: The frontend dynamically calculates the average rating as the user provides feedback.
+5. Transparent & Verifiable: Every submission generates a transaction hash that can be viewed on a block explorer like Etherscan.
 
-## Project Overview
+## 🛠️ Tech Stack
+Frontend: HTML5, CSS3, JavaScript (ES6+), Ethers.js v5
+Blockchain: Solidity, Ethereum (Sepolia Testnet)
+Development Tools: Remix IDE, VS Code, Live Server
 
-This example project includes:
+## 🚀 Getting Started
+To run this project locally, follow these steps.
 
-- A simple Hardhat configuration file.
-- Foundry-compatible Solidity unit tests.
-- TypeScript integration tests using [`node:test`](nodejs.org/api/test.html), the new Node.js native test runner, and [`viem`](https://viem.sh/).
-- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
+### Prerequisites
+1. A web browser with the MetaMask extension installed.
+2. Some free Sepolia test ETH from a faucet like sepoliafaucet.com.
 
-## Usage
+### Installation & Setup
+1. Clone the Repository
 
-### Running Tests
+2. Bash
+git clone [Your Repository URL]
+cd [Your Repository Folder]
+Deploy the Smart Contract
 
-To run all the tests in the project, execute the following command:
+3. Open Remix IDE.
+Copy the code from FeedbackContract.sol into a new file in Remix.
+Compile the contract.
+In the "Deploy" tab, select "Injected Provider - MetaMask" and connect your wallet (ensure you're on the Sepolia network).
+Deploy the contract and copy the deployed contract address and the ABI.
 
-```shell
-npx hardhat test
-```
+4. Configure the Frontend
+Open the script.js file.
+Paste the deployed contract address and ABI into the contractAddress and contractABI variables at the top of the file.
 
-You can also selectively run the Solidity or `node:test` tests:
+5. Run the Application
+If you're using VS Code, install the Live Server extension.
+Right-click on index.html and select "Open with Live Server".
 
-```shell
-npx hardhat test solidity
-npx hardhat test nodejs
-```
+The application will open in your default browser.
 
-### Make a deployment to Sepolia
+## 📖 Usage
+Visit the landing page and click "Connect Wallet".
+Once connected, click "Provide feedback".
+On the feedback form, select the current semester and the faculty member.
+Provide a rating from 1 to 5 for all 10 questions. The average rating will update dynamically.
+Click "Submit" and confirm the transaction in the MetaMask pop-up.
+Upon success, you will be redirected to a confirmation page with a link to your transaction on Etherscan.
 
-This project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
+## Future Plans
 
-To run the deployment to a local chain:
+1. Implement Zero-Knowledge Proofs for additional privacy so that even the wallet address cannot be revealed and even then the verification of a student can be performed.
+2. Enhance the software so that it can be used on multiple platforms apart from feedback collection for student-faculty only.
 
-```shell
-npx hardhat ignition deploy ignition/modules/Counter.ts
-```
+## 
+## 📄 License
 
-To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
-
-You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
-
-To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
-
-```shell
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
-```
-
-After setting the variable, you can run the deployment with the Sepolia network:
-
-```shell
-npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
-```
-# LNMIIT-Feedback-Collection-System
-# LNMIIT-Feedback-Collection-System
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
