@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provide Feedback</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+     <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js" type="application/javascript"></script>
+</head>
+<body>
+
+    <header class="header header-light">
+        <div class="logo">LNMIIT Faculty Feedback Collection</div>
+        <div id="wallet-display" class="wallet-display">Loading...</div>
+    </header>
+
+    <main class="feedback-container">
+        <div class="feedback-header">
+            <h2>LNMIIT Faculty Feedback Collection</h2>
+            <p>Share your honest feedback. All submissions are recorded on-chain. Average calculation is for your reference.</p>
+        </div>
+        <form id="feedback-form" class="feedback-form">
+            <div class="form-selections">
+                <div class="form-group">
+                    <label for="semester-select">Choose Current Semester</label>
+                    <select id="semester-select" name="semester" required>
+                        <option value="" disabled selected>Select semester</option>
+                        <option value="1">Semester 1</option>
+                        <option value="2">Semester 2</option>
+                        <option value="3">Semester 3</option>
+                        <option value="4">Semester 4</option>
+                        <option value="5">Semester 5</option>
+                        <option value="6">Semester 6</option>
+                        <option value="7">Semester 7</option>
+                        <option value="8">Semester 8</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="faculty-select">Choose Faculty (this semester)</label>
+                    <select id="faculty-select" name="faculty" required>
+                        <option value="" disabled selected>Select semester first</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="average-rating">Average rating (x.x/5.0)</label>
+                    <input type="text" id="average-rating" value="0.0/5.0" disabled>
+                </div>
+            </div>
+
+            <div class="form-questions">
+                <h4>Feedback Questions (1 = Poor, 5 = Excellent)</h4>
+            </div>
+            
+            <div class="form-footer">
+                <button type="submit" class="btn btn-submit">Submit</button>
+                <p class="submit-note">Note: On submit, MetaMask will prompt you to sign and send the transaction on Sepolia.</p>
+            </div>
+        </form>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" type="application/javascript"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Submitted</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+     <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js" type="application/javascript"></script>
+</head>
+<body>
+    <main class="success-container">
+        <div class="success-box">
+            <div class="success-icon">✓</div>
+            <h1>Feedback Submitted Successfully!</h1>
+            <p>Your anonymous feedback has been recorded on the Sepolia testnet.</p>
+            <div class="tx-hash-info">
+                <span>Transaction Hash:</span>
+                <a href="#" id="tx-hash-link" target="_blank" rel="noopener noreferrer">
+                    <span id="tx-hash-text">Loading...</span>
+                </a>
+            </div>
+            <a href="feedback.html" class="btn btn-submit">Submit Another Feedback</a>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" type="application/javascript"></script>
+    <script src="script.js"></script>
+</body>
+</html>
