@@ -89,7 +89,63 @@ body {
 .feedback-header { text-align: center; margin-bottom: 2.5rem; }
 .feedback-header h2 { font-size: 2rem; margin-bottom: 0.5rem; }
 .feedback-header p { color: var(--subtle-text); }
-.feedback-form { display: grid; grid-template-columns: 300px 1fr; gap: 4rem; grid-template-areas: "selections questions" "footer footer"; }
+/* --- REPLACE your existing .feedback-form rule with this --- */
+.feedback-form {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem 3rem;
+    grid-template-areas:
+        "selections questions"
+        "review review"
+        "footer footer";
+    max-width: 900px; /* Set a max-width for the whole form */
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+/* --- ADD these new rules to assign and style the review box --- */
+.form-selections { grid-area: selections; }
+.form-questions { grid-area: questions; }
+.form-review { grid-area: review; }
+.form-footer { grid-area: footer; text-align: center; }
+
+.form-review textarea {
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.word-counter {
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--subtle-text);
+    margin-top: 0.25rem;
+}
+.word-counter.limit-exceeded {
+    color: #ef4444; /* Red color for warning */
+    font-weight: bold;
+}
+
+
+/* --- REPLACE your existing responsive rule for .feedback-form with this --- */
+@media (max-width: 900px) {
+    .feedback-form {
+        grid-template-columns: 1fr; /* Switch to a single column */
+        grid-template-areas:
+            "selections"
+            "questions"
+            "review"
+            "footer";
+        gap: 2rem;
+    }
+}
 .form-selections { grid-area: selections; }
 .form-questions { grid-area: questions; }
 .form-footer { grid-area: footer; text-align: center; }
