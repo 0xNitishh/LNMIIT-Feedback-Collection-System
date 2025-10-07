@@ -76,6 +76,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(e.target);
             if (!formData.get('faculty')) { alert('Please select a faculty.'); return; }
 
+            const reviewTextarea = document.getElementById('additional-review');
+            const wordCounter = document.getElementById('word-counter');
+            const maxWords = 500;
+
+            reviewTextarea.addEventListener('input', () => {
+               const text = reviewTextarea.value.trim();
+              const words = text === '' ? 0 : text.split(/\s+/).length;
+              wordCounter.textContent = `${words} / ${maxWords} words`;
+
+              if (words > maxWords) {
+                   wordCounter.classList.add('limit-exceeded');
+               } else {
+                   wordCounter.classList.remove('limit-exceeded');
+               }
+            });
+
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
             submitBtn.classList.add('loading');
@@ -91,10 +107,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const semester = parseInt(formData.get('semester'));
                 const ratingsArray = Array.from({ length: 10 }, (_, i) => parseInt(ratings[`q${i + 1}`]));
 
-                const tx = await contract.submitFeedback(facultyName, semester, ratingsArray);
-                const receipt = await tx.wait();
+                // ADD THIS LINE to get the review text
+                const reviewText = document.getElementById('additional-review').value;
+
+                // UPDATE THE CONTRACT CALL to include reviewText
+                // Note: Your contract's ABI in this file must be updated to reflect this new parameter
+                const tx = await contract.submitFeedback(facultyName, semester, ratingsArray, reviewText);
                 
+                const receipt = await tx.wait();
+
                 sessionStorage.setItem('txHash', receipt.transactionHash);
+                sessionStorage.setItem('submittedRatings', JSON.stringify(ratingsArray));
                 window.location.href = 'success.html';
 
             } catch (error) {
@@ -115,5 +138,51 @@ document.addEventListener('DOMContentLoaded', () => {
         const txHashLink = document.getElementById('tx-hash-link');
         txHashText.textContent = txHash;
         txHashLink.href = `https://sepolia.etherscan.io/tx/${txHash}`;
+
+        // Bar graph logic
+        const ratingsArray = JSON.parse(sessionStorage.getItem('submittedRatings') || 'null');
+        if (Array.isArray(ratingsArray) && ratingsArray.length === 10) {
+            const barGraphDiv = document.getElementById('rating-bar-graph');
+            barGraphDiv.style.display = 'block';
+            const ctx = document.getElementById('barGraphCanvas').getContext('2d');
+            const questions = [
+                "Clarity of explanations",
+                "Knowledge of subject matter",
+                "Pace of teaching",
+                "Engagement and interaction",
+                "Encouragement of questions",
+                "Quality of assignments",
+                "Timely feedback on work",
+                "Availability outside class hours",
+                "Use of practical examples",
+                "Overall teaching effectiveness"
+            ];
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: questions,
+                    datasets: [{
+                        label: 'Your Ratings',
+                        data: ratingsArray,
+                        backgroundColor: 'rgba(75,192,192,0.7)',
+                        borderColor: 'rgba(75,192,192,1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5,
+                            title: { display: true, text: 'Rating (1-5)' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: false }
+                    }
+                }
+            });
+        }
     }
 });
