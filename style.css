@@ -89,26 +89,11 @@ body {
 .feedback-header { text-align: center; margin-bottom: 2.5rem; }
 .feedback-header h2 { font-size: 2rem; margin-bottom: 0.5rem; }
 .feedback-header p { color: var(--subtle-text); }
-/* --- REPLACE your existing .feedback-form rule with this --- */
-.feedback-form {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 2rem 3rem;
-    grid-template-areas:
-        "selections questions"
-        "review review"
-        "footer footer";
-    max-width: 900px; /* Set a max-width for the whole form */
-    margin: 2rem auto;
-    padding: 2rem;
-}
-
-/* --- ADD these new rules to assign and style the review box --- */
+.feedback-form { display: grid; grid-template-columns: 220px 1fr; gap: 2rem 3rem; grid-template-areas: "selections questions" "review review" "footer footer"; max-width: 900px; margin: 2rem auto; padding: 2rem;}
 .form-selections { grid-area: selections; }
 .form-questions { grid-area: questions; }
 .form-review { grid-area: review; }
 .form-footer { grid-area: footer; text-align: center; }
-
 .form-review textarea {
     width: 100%;
     min-height: 120px;
