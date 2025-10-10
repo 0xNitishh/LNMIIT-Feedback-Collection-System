@@ -29,8 +29,11 @@ contract FeedbackContract {
     // CHANGE: The event now emits the single formatted string array.
     event FeedbackSubmitted(
         address indexed student,
+        uint256 timestamp,
         string facultyName,
-        uint8 indexed semester,
+        uint8 semester,
+        uint8 averageRatingx10,
+        string reviewText,
         string[10] feedbackEntries
     );
 
@@ -81,7 +84,7 @@ contract FeedbackContract {
         }));
 
         // Emit the formatted array in the event log
-        emit FeedbackSubmitted(msg.sender, _facultyName, _semester, feedbackEntries);
+        emit FeedbackSubmitted(msg.sender, block.timestamp, _facultyName, _semester, avgX10, _reviewText, feedbackEntries);
     }
     
     // Helper function to convert a uint (1-5) to a string.
