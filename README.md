@@ -57,6 +57,7 @@ Upon success, you will be redirected to a confirmation page with a link to your 
 
 1. Implement Zero-Knowledge Proofs for additional privacy so that even the wallet address cannot be revealed and even then the verification of a student can be performed.
 2. Enhance the software so that it can be used on multiple platforms apart from feedback collection for student-faculty only.
+3. Improve it and scale it up further for multiple users. 
 
 ## 
 ## 📄 License
